@@ -1,0 +1,22 @@
+ext {
+    retrofitVersion = '2.9.0'
+
+    retrofitDependencies = [
+            retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            gson : "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    ]
+
+    splashScreenVersion = '1.0.0-rc01'
+
+    roomVersion = '2.4.2'
+
+    roomDependencies = [
+            common : "androidx.room:room-common:${roomVersion}",
+            ktx : "androidx.room:room-ktx:${roomVersion}",
+            runtime : "androidx.room:room-runtime:${roomVersion}"
+    ]
+
+    hiltVersion = '2.38.1'
+    hiltComposeVersion = '1.0.0-alpha03'
+    mockitoVersion = '2.22.0'
+}

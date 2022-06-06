@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/cardViewMargin"
+    android:layout_marginTop="@dimen/cardViewMargin"
+    android:layout_marginRight="@dimen/cardViewMargin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/cardPadding">
+
+        <ImageView
+            android:id="@+id/im_sports_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_round"></ImageView>
+
+        <TextView
+            android:id="@+id/tv_sports_list_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/cardTextSize"
+            android:layout_marginLeft="@dimen/cardItemDistance"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

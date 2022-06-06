@@ -19,4 +19,10 @@ ext {
     hiltVersion = '2.38.1'
     hiltComposeVersion = '1.0.0-alpha03'
     mockitoVersion = '2.22.0'
+
+    navigationVersion = '2.5.0-rc01'
+    navigationDependencies = [
+            fragment : "androidx.navigation:navigation-fragment:${navigationVersion}",
+            ui : "androidx.navigation:navigation-ui:${navigationVersion}"
+    ]
 }

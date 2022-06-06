@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/sportsListingFragment">
+
+    <fragment
+        android:id="@+id/sportsListingFragment"
+        android:name="com.example.sportz.presentation.listing.SportsListingFragment"
+        android:label="fragment_sports_listing"
+        tools:layout="@layout/fragment_sports_listing" >
+        <action
+            android:id="@+id/action_sportsListingFragment_to_sportsDetailsFragment"
+            app:destination="@id/sportsDetailsFragment" />
+        <action
+            android:id="@+id/action_sportsListingFragment_to_sportGroupFragment"
+            app:destination="@id/sportGroupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sportsDetailsFragment"
+        android:name="com.example.sportz.SportsDetailsFragment"
+        android:label="fragment_sports_details"
+        tools:layout="@layout/fragment_sports_details" />
+    <fragment
+        android:id="@+id/sportGroupFragment"
+        android:name="com.example.sportz.SportGroupFragment"
+        android:label="fragment_sport_group"
+        tools:layout="@layout/fragment_sport_group" />
+</navigation>

@@ -1,5 +1,6 @@
 package com.example.sportz.presentation.listing
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,17 +9,23 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportz.R
 import com.example.sportz.domain.model.Sports
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 
-class SportsListingAdapter(val sports: List<Sports>) :
+class SportsListingAdapter(
+    val sports: List<Sports>,
+    val onItemClicked: ((index: Int) -> Unit)
+) :
     RecyclerView.Adapter<SportsListingAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var tvSportItemName: TextView = itemView.findViewById(R.id.tv_sports_list_item_name)
+        var imSportsIcon: ImageView = itemView.findViewById(R.id.im_sports_icon)
 
         init {
             itemView.setOnClickListener {
-                var position: Int = getAdapterPosition()
+                val position: Int = adapterPosition
+                onItemClicked(sports[position].id)
             }
         }
     }
@@ -31,6 +38,10 @@ class SportsListingAdapter(val sports: List<Sports>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvSportItemName.text = sports[position].name
+        GlideToVectorYou
+            .init()
+            .with(holder.itemView.context)
+            .load(Uri.parse(sports[position].icon), holder.imSportsIcon)
     }
 
     override fun getItemCount(): Int {

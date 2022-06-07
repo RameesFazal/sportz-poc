@@ -10,6 +10,4 @@ interface SportsDetailsRepository {
     suspend fun getSportByIdFromLocal(id: Int): SportsDetails?
 
     suspend fun insertSportDetail(sportsDetails: SportsDetails)
-
-    suspend fun deleteSportDetail(id: Int)
 }

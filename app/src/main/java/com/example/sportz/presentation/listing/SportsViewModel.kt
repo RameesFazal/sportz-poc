@@ -1,6 +1,7 @@
 package com.example.sportz.presentation.listing
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.sportz.common.Resource
 import com.example.sportz.domain.model.Sports
@@ -18,7 +19,11 @@ class SportsViewModel @Inject constructor(
     private val _response: MutableLiveData<Resource<List<Sports>>> = MutableLiveData()
     val response: LiveData<Resource<List<Sports>>> = _response
 
-    fun fetchSportsList() = viewModelScope.launch {
+    init {
+        fetchSportsList()
+    }
+
+    private fun fetchSportsList() = viewModelScope.launch {
         getSports().collect { values->
             _response.value = values
         }

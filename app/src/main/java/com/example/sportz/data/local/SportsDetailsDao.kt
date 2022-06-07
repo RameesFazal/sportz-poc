@@ -13,7 +13,4 @@ interface SportsDetailsDao {
 
     @Query("SELECT * FROM sportdetailsentity WHERE sportsId = :id")
     suspend fun getSportById(id: Int): SportDetailsEntity?
-
-    @Query("DELETE FROM sportdetailsentity WHERE sportsId = :id")
-    fun deleteSportsById(id: Int)
 }

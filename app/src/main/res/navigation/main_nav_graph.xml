@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/sportsDetailsFragment"
-        android:name="com.example.sportz.SportsDetailsFragment"
+        android:name="com.example.sportz.presentation.detail.SportsDetailsFragment"
         android:label="fragment_sports_details"
         tools:layout="@layout/fragment_sports_details" />
     <fragment

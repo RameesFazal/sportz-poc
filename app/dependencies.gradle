@@ -25,4 +25,7 @@ ext {
             fragment : "androidx.navigation:navigation-fragment:${navigationVersion}",
             ui : "androidx.navigation:navigation-ui:${navigationVersion}"
     ]
+
+    picassoVersion = '2.8'
+    glideVersion = 'v2.0.0'
 }

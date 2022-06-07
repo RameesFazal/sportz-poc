@@ -24,7 +24,6 @@ class SportsDetailsRepositoryImpl(
 
         try {
             val remoteSports = api.getSportsDetail(id)
-            deleteSportDetail(id)
             insertSportDetail(remoteSports.data.toSportsDetails())
             val newDetails = getSportByIdFromLocal(id)
             newDetails?.let {
@@ -53,9 +52,5 @@ class SportsDetailsRepositoryImpl(
 
     override suspend fun insertSportDetail(sportsDetails: SportsDetails) {
         sportsDetailsDao.insertSport(sportsDetails.toSportsDetailsEntity())
-    }
-
-    override suspend fun deleteSportDetail(id: Int) {
-        sportsDetailsDao.deleteSportsById(id)
     }
 }

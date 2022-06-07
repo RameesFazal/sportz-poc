@@ -12,13 +12,20 @@ import javax.inject.Inject
 @HiltViewModel
 class SportsDetailsViewModel @Inject constructor(
     private val getSportsDetail: GetSportsDetail,
+    savedStateHandle: SavedStateHandle,
     application: Application
 ) : AndroidViewModel(application) {
 
     private val _response: MutableLiveData<Resource<SportsDetails>> = MutableLiveData()
     val response: LiveData<Resource<SportsDetails>> = _response
 
-    fun fetchSportsList(id: Int) = viewModelScope.launch {
+    init {
+        val sportsId: Int? = savedStateHandle["sportsId"]
+        sportsId?.let {
+            fetchSportsById(it)
+        }
+    }
+    private fun fetchSportsById(id: Int) = viewModelScope.launch {
         getSportsDetail(id).collect { values ->
             _response.value = values
         }

@@ -4,4 +4,7 @@
     <dimen name="cardTextSize">16sp</dimen>
     <dimen name="cardItemDistance">4dp</dimen>
     <dimen name="cardPadding">8dp</dimen>
+    <dimen name="cardImageSize">72dp</dimen>
+    <dimen name="imageHeight">255dp</dimen>
+    <dimen name="textMedium">18sp</dimen>
 </resources>

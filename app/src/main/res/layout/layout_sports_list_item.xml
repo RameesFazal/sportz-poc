@@ -14,16 +14,16 @@
 
         <ImageView
             android:id="@+id/im_sports_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher_round"></ImageView>
+            android:layout_width="@dimen/cardImageSize"
+            android:layout_height="@dimen/cardImageSize"
+            android:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/tv_sports_list_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/cardTextSize"
-            android:layout_marginLeft="@dimen/cardItemDistance"/>
+            android:layout_marginStart="@dimen/cardItemDistance"
+            android:textSize="@dimen/cardTextSize" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

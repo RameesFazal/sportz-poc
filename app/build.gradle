@@ -61,6 +61,9 @@ dependencies {
     implementation navigationDependencies.fragment
     implementation navigationDependencies.ui
 
+    implementation "com.squareup.picasso:picasso:${picassoVersion}"
+    implementation "com.github.corouteam:GlideToVectorYou:${glideVersion}"
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

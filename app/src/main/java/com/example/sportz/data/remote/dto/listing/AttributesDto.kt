@@ -1,8 +1,8 @@
-package com.example.sportz.data.remote.dto
+package com.example.sportz.data.remote.dto.listing
 
 data class AttributesDto(
     val decathlon_id: Int,
-    val description: String,
+    val description: String?,
     val icon: String?,
     val locale: String,
     val name: String?,

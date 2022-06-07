@@ -1,6 +1,5 @@
 package com.example.sportz.data.repository
 
-import android.util.Log
 import com.example.sportz.common.Resource
 import com.example.sportz.data.local.SportsDao
 import com.example.sportz.data.remote.SportsApi

@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.room.Room
 import com.example.sportz.data.local.SportsDatabase
 import com.example.sportz.data.remote.SportsApi
+import com.example.sportz.data.repository.SportsDetailsRepositoryImpl
 import com.example.sportz.data.repository.SportsRepositoryImpl
+import com.example.sportz.domain.repository.SportsDetailsRepository
 import com.example.sportz.domain.repository.SportsRepository
 import com.example.sportz.domain.use_case.GetSports
+import com.example.sportz.domain.use_case.GetSportsDetail
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +35,21 @@ object SportsModule {
         api: SportsApi
     ): SportsRepository {
         return SportsRepositoryImpl(dao = db.dao, api = api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetSportsDetailsUseCase(repository: SportsDetailsRepository): GetSportsDetail {
+        return GetSportsDetail(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providesSportsDetailsRepository(
+        db: SportsDatabase,
+        api: SportsApi
+    ): SportsDetailsRepository {
+        return SportsDetailsRepositoryImpl(sportsDetailsDao = db.detailsDao, api = api)
     }
 
     @Provides

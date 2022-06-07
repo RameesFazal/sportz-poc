@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sportz.R
 import com.example.sportz.common.Resource
 import com.example.sportz.domain.model.Sports
-import com.example.sportz.presentation.SportsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

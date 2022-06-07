@@ -1,4 +1,4 @@
-package com.example.sportz.presentation
+package com.example.sportz.presentation.listing
 
 import android.app.Application
 import androidx.lifecycle.*

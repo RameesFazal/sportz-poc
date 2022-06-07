@@ -6,7 +6,7 @@ import com.example.sportz.domain.repository.SportsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeSportsRepository : SportsRepository {
+class MockSportsRepository : SportsRepository {
     private val sportsList = mutableListOf<Sports>()
 
     override fun getSports(): Flow<Resource<List<Sports>>> {

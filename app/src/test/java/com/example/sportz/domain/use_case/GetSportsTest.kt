@@ -1,7 +1,7 @@
 package com.example.sportz.domain.use_case
 
 import com.example.sportz.common.Resource
-import com.example.sportz.data.repository.FakeSportsRepository
+import com.example.sportz.data.repository.MockSportsRepository
 import com.example.sportz.domain.model.Sports
 import com.example.sportz.domain.repository.SportsRepository
 import kotlinx.coroutines.flow.first
@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations
 
 class GetSportsTest {
     private lateinit var getSports: GetSports
-    private lateinit var fakeSportsRepository: FakeSportsRepository
+    private lateinit var mockSportsRepository: MockSportsRepository
     private val sportsToInsert = mutableListOf<Sports>()
 
     @Mock
@@ -25,8 +25,8 @@ class GetSportsTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        fakeSportsRepository = FakeSportsRepository()
-        getSports = GetSports(fakeSportsRepository)
+        mockSportsRepository = MockSportsRepository()
+        getSports = GetSports(mockSportsRepository)
         ('a'..'z').forEachIndexed { index, c ->
             sportsToInsert.add(
                 Sports(
@@ -38,20 +38,20 @@ class GetSportsTest {
         }
         sportsToInsert.shuffle()
         runBlocking {
-            fakeSportsRepository.insertSports(sportsToInsert)
+            mockSportsRepository.insertSports(sportsToInsert)
         }
     }
 
     @Test
     fun `Test sport list insertion to room db`() = runBlocking {
-        val sports = fakeSportsRepository.getSportsFromLocal()
+        val sports = mockSportsRepository.getSportsFromLocal()
         assertEquals(sports.size, 26)
     }
 
     @Test
     fun `Test db is cleared before refreshing`() = runBlocking {
-        fakeSportsRepository.clearAllSports()
-        val sports = fakeSportsRepository.getSportsFromLocal()
+        mockSportsRepository.clearAllSports()
+        val sports = mockSportsRepository.getSportsFromLocal()
         assertEquals(sports.size, 0)
     }
 

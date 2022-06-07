@@ -1,4 +1,4 @@
-package com.example.sportz.data.remote.dto
+package com.example.sportz.data.remote.dto.listing
 
 import com.example.sportz.domain.model.Sports
 

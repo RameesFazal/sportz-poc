@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.sportz.R
 import com.example.sportz.common.Resource
 import com.example.sportz.domain.model.SportsDetails
 import com.example.sportz.presentation.MainActivity
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +23,7 @@ class SportsDetailsFragment : Fragment() {
     private var sportsId: Int? = null
     private lateinit var imSports: ImageView
     private lateinit var tvSportsDescription: TextView
-    private lateinit var loading: CircularProgressIndicator
+    private lateinit var loading: ProgressBar
     private lateinit var tvErrorNoData: TextView
     private val sportsDetailsViewModel by viewModels<SportsDetailsViewModel>()
 
@@ -67,6 +67,7 @@ class SportsDetailsFragment : Fragment() {
                             tvErrorNoData.visibility = View.GONE
                             loading.visibility = View.GONE
                         } ?: run {
+                            loading.visibility = View.GONE
                             tvErrorNoData.visibility = View.VISIBLE
                         }
                     }
@@ -88,7 +89,7 @@ class SportsDetailsFragment : Fragment() {
         loading.visibility = View.GONE
         imSports.visibility = View.VISIBLE
         tvSportsDescription.visibility = View.VISIBLE
-        Picasso.get().load(sportsDetail.image).into(imSports)
+        Picasso.get().load(sportsDetail.image).placeholder(R.mipmap.ic_launcher).into(imSports)
         tvSportsDescription.text = sportsDetail.description
         (activity as MainActivity).supportActionBar?.title = sportsDetail.name
     }

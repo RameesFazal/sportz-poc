@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,7 @@ class SportsListingFragment : Fragment() {
 
     private var sportsListingAdapter: RecyclerView.Adapter<SportsListingAdapter.ViewHolder>? = null
     private lateinit var rvSportsListing: RecyclerView
+    private lateinit var loading: ProgressBar
     private val sportsList = mutableListOf<Sports>()
     private val sportsViewModel by viewModels<SportsViewModel>()
 
@@ -33,6 +35,7 @@ class SportsListingFragment : Fragment() {
             getString(R.string.screen_listing_title)
         val view = inflater.inflate(R.layout.fragment_sports_listing, container, false)
         rvSportsListing = view.findViewById(R.id.rv_sports_listing)
+        loading = view.findViewById(R.id.loading)
         return view
     }
 
@@ -51,24 +54,34 @@ class SportsListingFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = sportsListingAdapter
         }
-
         sportsViewModel.response.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        sportsList.clear()
-                        sportsList.addAll(it)
-                        sportsListingAdapter?.notifyItemRangeInserted(0, sportsList.size - 1)
+                        setData(it)
+                    } ?: run {
+                        loading.visibility = View.GONE
                     }
                 }
                 is Resource.Error -> {
                     response.data?.let {
-                        sportsList.clear()
-                        sportsList.addAll(it)
-                        sportsListingAdapter?.notifyItemRangeInserted(0, sportsList.size - 1)
+                       setData(it)
+                    } ?: run {
+                        loading.visibility = View.GONE
                     }
+                }
+                is Resource.Loading -> {
+                    rvSportsListing.visibility = View.GONE
+                    loading.visibility = View.VISIBLE
                 }
             }
         }
+    }
+    private fun setData(newList: List<Sports>){
+        loading.visibility = View.GONE
+        rvSportsListing.visibility = View.VISIBLE
+        sportsList.clear()
+        sportsList.addAll(newList)
+        sportsListingAdapter?.notifyDataSetChanged()
     }
 }

@@ -2,6 +2,7 @@ package com.example.sportz.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.sportz.common.Constants
 import com.example.sportz.data.local.SportsDatabase
 import com.example.sportz.data.remote.SportsApi
 import com.example.sportz.data.repository.SportsDetailsRepositoryImpl
@@ -55,14 +56,14 @@ object SportsModule {
     @Provides
     @Singleton
     fun providesSportsDatabase(app: Application): SportsDatabase {
-        return Room.databaseBuilder(app, SportsDatabase::class.java, "sports_db")
+        return Room.databaseBuilder(app, SportsDatabase::class.java, Constants.DATABASE_NAME)
             .build()
     }
 
     @Provides
     @Singleton
     fun providesSportsApi(): SportsApi {
-        return Retrofit.Builder().baseUrl(SportsApi.BASE_URL)
+        return Retrofit.Builder().baseUrl(Constants.SPORTS_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(SportsApi::class.java)
     }

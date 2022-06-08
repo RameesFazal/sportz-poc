@@ -9,10 +9,23 @@ import kotlinx.coroutines.flow.flow
 class MockSportsDetailsRepository : SportsDetailsRepository {
 
     private val sportsList = mutableListOf<SportsDetails>()
+    var shouldReturnNetworkError: Boolean = false
 
     override fun getSportById(id: Int): Flow<Resource<SportsDetails>> {
+        if (shouldReturnNetworkError) {
+            return flow {
+                val sportsDetails = getSportByIdFromLocal(id)
+                emit(Resource.Error("Oops! Something went wrong", sportsDetails))
+            }
+        }
         return flow {
-            val sportDetails: SportsDetails = sportsList.first { id == id }
+            val sportDetails = SportsDetails(
+                id = 1,
+                name = "Baseball",
+                description = "A Sample Description",
+                image = ""
+            )
+            insertSportDetail(sportDetails)
             emit(Resource.Success(sportDetails))
         }
     }
@@ -23,9 +36,5 @@ class MockSportsDetailsRepository : SportsDetailsRepository {
 
     override suspend fun insertSportDetail(sportsDetails: SportsDetails) {
         sportsList.add(sportsDetails)
-    }
-
-    override suspend fun deleteSportDetail(id: Int) {
-        sportsList.removeAll { it.id == id }
     }
 }

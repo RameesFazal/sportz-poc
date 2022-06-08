@@ -12,8 +12,4 @@ interface SportsApi {
 
     @GET("/sports/{id}")
     suspend fun getSportsDetail(@Path("id") id: Int): SportsDetailsDto
-
-    companion object {
-        const val BASE_URL = "https://sports.api.decathlon.com"
-    }
 }

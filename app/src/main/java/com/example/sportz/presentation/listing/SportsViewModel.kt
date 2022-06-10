@@ -1,7 +1,6 @@
 package com.example.sportz.presentation.listing
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.sportz.common.Resource
 import com.example.sportz.domain.model.Sports

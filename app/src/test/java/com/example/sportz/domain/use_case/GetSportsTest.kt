@@ -40,8 +40,16 @@ class GetSportsTest {
     }
 
     @Test
+    fun `Returns new data on success scenario`() = runBlocking {
+        mockSportsRepository.shouldReturnNetworkError = false
+        val output = getSports.invoke()
+        assertEquals(output.first().data?.size, 1)
+    }
+
+    @Test
     fun `Refresh local db on new data`() = runBlocking {
+        mockSportsRepository.shouldReturnNetworkError = false
         getSports.invoke()
-        assertTrue(mockSportsRepository.getSportsFromLocal().size > sportsToInsert.size)
+        assertTrue(mockSportsRepository.getSportsFromLocal().isNotEmpty())
     }
 }

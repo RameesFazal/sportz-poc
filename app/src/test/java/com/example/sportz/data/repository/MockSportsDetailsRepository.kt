@@ -14,8 +14,7 @@ class MockSportsDetailsRepository : SportsDetailsRepository {
     override fun getSportById(id: Int): Flow<Resource<SportsDetails>> {
         if (shouldReturnNetworkError) {
             return flow {
-                val sportsDetails = getSportByIdFromLocal(id)
-                emit(Resource.Error("Oops! Something went wrong", sportsDetails))
+                emit(Resource.Error("Oops! Something went wrong"))
             }
         }
         return flow {
@@ -25,13 +24,16 @@ class MockSportsDetailsRepository : SportsDetailsRepository {
                 description = "A Sample Description",
                 image = ""
             )
-            insertSportDetail(sportDetails)
             emit(Resource.Success(sportDetails))
         }
     }
 
     override suspend fun getSportByIdFromLocal(id: Int): SportsDetails? {
-        return sportsList.first { id == id }
+        val res = sportsList.filter { id == id }
+        if (res.isNotEmpty()) {
+            return res.first()
+        }
+        return null
     }
 
     override suspend fun insertSportDetail(sportsDetails: SportsDetails) {

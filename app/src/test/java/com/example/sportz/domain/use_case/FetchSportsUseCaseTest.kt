@@ -8,15 +8,15 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class GetSportsTest {
-    private lateinit var getSports: GetSports
+class FetchSportsUseCaseTest {
+    private lateinit var fetchSportsUseCase: FetchSportsUseCase
     private lateinit var mockSportsRepository: MockSportsRepository
     private val sportsToInsert = mutableListOf<Sports>()
 
     @Before
     fun setUp() {
         mockSportsRepository = MockSportsRepository()
-        getSports = GetSports(mockSportsRepository)
+        fetchSportsUseCase = FetchSportsUseCase(mockSportsRepository)
         ('a'..'z').forEachIndexed { index, c ->
             sportsToInsert.add(
                 Sports(
@@ -33,23 +33,16 @@ class GetSportsTest {
     }
 
     @Test
-    fun `Returns cached data on error scenario`() = runBlocking {
+    fun `Returns error when data not available`() = runBlocking {
         mockSportsRepository.shouldReturnNetworkError = true
-        val output = getSports.invoke()
-        assertEquals(output.first().data?.size, 26)
+        val output = fetchSportsUseCase.invoke()
+        assertEquals(output.first().message, "Oops! Something went wrong")
     }
 
     @Test
     fun `Returns new data on success scenario`() = runBlocking {
         mockSportsRepository.shouldReturnNetworkError = false
-        val output = getSports.invoke()
+        val output = fetchSportsUseCase.invoke()
         assertEquals(output.first().data?.size, 1)
-    }
-
-    @Test
-    fun `Refresh local db on new data`() = runBlocking {
-        mockSportsRepository.shouldReturnNetworkError = false
-        getSports.invoke()
-        assertTrue(mockSportsRepository.getSportsFromLocal().isNotEmpty())
     }
 }

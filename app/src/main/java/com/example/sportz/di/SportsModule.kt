@@ -9,8 +9,10 @@ import com.example.sportz.data.repository.SportsDetailsRepositoryImpl
 import com.example.sportz.data.repository.SportsRepositoryImpl
 import com.example.sportz.domain.repository.SportsDetailsRepository
 import com.example.sportz.domain.repository.SportsRepository
-import com.example.sportz.domain.use_case.GetSports
-import com.example.sportz.domain.use_case.GetSportsDetail
+import com.example.sportz.domain.use_case.FetchSportsUseCase
+import com.example.sportz.domain.use_case.FetchSportsItemUseCase
+import com.example.sportz.domain.use_case.SyncSportsDetailsUseCase
+import com.example.sportz.domain.use_case.SyncSportsListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,8 +27,14 @@ object SportsModule {
 
     @Provides
     @Singleton
-    fun provideGetSportsUseCase(repository: SportsRepository): GetSports {
-        return GetSports(repository)
+    fun provideGetSportsUseCase(repository: SportsRepository): FetchSportsUseCase {
+        return FetchSportsUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSyncSportsListUseCase(repository: SportsRepository): SyncSportsListUseCase {
+        return SyncSportsListUseCase(repository)
     }
 
     @Provides
@@ -40,8 +48,14 @@ object SportsModule {
 
     @Provides
     @Singleton
-    fun provideGetSportsDetailsUseCase(repository: SportsDetailsRepository): GetSportsDetail {
-        return GetSportsDetail(repository)
+    fun provideGetSportsDetailsUseCase(repository: SportsDetailsRepository): FetchSportsItemUseCase {
+        return FetchSportsItemUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSyncSportsItemUseCase(repository: SportsDetailsRepository): SyncSportsDetailsUseCase {
+        return SyncSportsDetailsUseCase(repository)
     }
 
     @Provides

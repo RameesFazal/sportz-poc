@@ -17,7 +17,7 @@ class MockSportsRepository : SportsRepository {
         }
         if (shouldReturnNetworkError) {
             return flow {
-                emit(Resource.Error("Oops! Something went wrong", sportsList.toList()))
+                emit(Resource.Error("Oops! Something went wrong", listOf()))
             }
         }
         sportsList.clear()

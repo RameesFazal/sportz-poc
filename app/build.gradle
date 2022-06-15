@@ -72,13 +72,16 @@ dependencies {
 
     testImplementation "junit:junit:${junitVersion}"
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "androidx.arch.core:core-testing:${coreTestingVersion}"
     androidTestImplementation "androidx.test.ext:junit:${extJunitVersion}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
     androidTestImplementation ("androidx.test.espresso:espresso-contrib:${espressoCoreVersion}"){
         exclude group: 'org.checkerframework', module: 'checker'
     }
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesTestVersion}"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesTestVersion}"
     androidTestImplementation "com.google.truth:truth:${truthVersion}"
+    testImplementation "com.google.truth:truth:${truthVersion}"
     androidTestImplementation "androidx.arch.core:core-testing:${coreTestingVersion}"
     androidTestImplementation("com.google.dagger:hilt-android-testing:${hiltVersion}")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:${hiltVersion}")

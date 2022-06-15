@@ -4,14 +4,14 @@ import com.example.sportz.data.local.entity.SportsEntity
 
 data class Sports(
     val id: Int,
-    val name: String,
-    val icon: String
+    val name: String?,
+    val icon: String?
 ) {
     fun toSportsEntity(): SportsEntity {
         return SportsEntity(
-            name = name,
+            name = name!!,
             sportsId = id,
-            icon = icon
+            icon = icon!!
         )
     }
 }

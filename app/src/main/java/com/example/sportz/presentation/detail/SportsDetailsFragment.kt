@@ -39,6 +39,7 @@ class SportsDetailsFragment : Fragment(R.layout.fragment_sports_details) {
                         response.data?.let { it ->
                             setData(it)
                         } ?: run {
+                            sportsDetailsFragmentBinding.loading.visibility = View.GONE
                             sportsDetailsFragmentBinding.tvErrorMessage.visibility = View.VISIBLE
                         }
                     }

@@ -17,37 +17,31 @@ class SportsDetailsRepositoryImpl(
 
     override fun getSportById(id: Int): Flow<Resource<SportsDetails>> = flow {
         emit(Resource.Loading())
-        val sportsDetails = getSportByIdFromLocal(id)
-        sportsDetails?.let {
-            emit(Resource.Success(sportsDetails))
-        }
-
         try {
             val remoteSports = api.getSportsDetail(id)
-            insertSportDetail(remoteSports.data.toSportsDetails())
-            val newDetails = getSportByIdFromLocal(id)
-            newDetails?.let {
-                emit(Resource.Success(newDetails))
-            }
+            emit(Resource.Success(remoteSports.data.toSportsDetails()))
         } catch (e: HttpException) {
             emit(
                 Resource.Error(
                     message = "Couldn't reach server, Please check your connection!",
-                    data = sportsDetails
                 )
             )
         } catch (e: IOException) {
             emit(
                 Resource.Error(
                     message = "Oops! Something went wrong",
-                    data = sportsDetails
                 )
             )
         }
     }
 
     override suspend fun getSportByIdFromLocal(id: Int): SportsDetails? {
-        return sportsDetailsDao.getSportById(id)?.toSportsDetails()
+        val res = sportsDetailsDao.getSportById(id)
+        res?.let {
+            return it.toSportsDetails()
+        }?: run {
+            return null
+        }
     }
 
     override suspend fun insertSportDetail(sportsDetails: SportsDetails) {

@@ -5,7 +5,7 @@ import com.example.sportz.domain.model.Sports
 import com.example.sportz.domain.repository.SportsRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetSports(
+class FetchSportsUseCase(
     private val repository: SportsRepository
 ) {
     operator fun invoke() : Flow<Resource<List<Sports>>> {

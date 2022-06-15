@@ -16,31 +16,24 @@ class SportsRepositoryImpl(
 ) : SportsRepository {
     override fun getSports(): Flow<Resource<List<Sports>>> = flow {
         emit(Resource.Loading())
-        val sports = getSportsFromLocal()
-        emit(Resource.Loading(data = sports))
         try {
-            val remoteSports = api.getSports()
-            clearAllSports()
-            insertSports(remoteSports.data.filter { it.attributes.name != null && it.attributes.icon != null }
-                .map { it.toSports() })
+            val remoteSports = api.getSports().data.filter {it.attributes.name != null && it.attributes.icon != null }.map { it.toSports() }
+            emit(Resource.Success(remoteSports))
         } catch (e: HttpException) {
             emit(
                 Resource.Error(
                     message = "Couldn't reach server, Please check your connection!",
-                    data = sports
+                    data = listOf()
                 )
             )
         } catch (e: IOException) {
             emit(
                 Resource.Error(
                     message = "Oops! Something went wrong",
-                    data = sports
+                    data = listOf()
                 )
             )
         }
-
-        val newSports = getSportsFromLocal()
-        emit(Resource.Success(newSports))
     }
 
     override suspend fun insertSports(sports: List<Sports>) {

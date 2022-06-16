@@ -20,6 +20,7 @@ ext {
     coreTestingVersion = '2.0.0'
     fragmentTestVersion = '1.3.0-alpha08'
     mockitoVersion = '3.10.0'
+    leakCanaryVersion = '2.8.1'
 
     retrofitDependencies = [
             retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",

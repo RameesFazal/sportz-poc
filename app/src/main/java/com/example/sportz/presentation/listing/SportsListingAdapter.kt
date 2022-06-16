@@ -13,6 +13,7 @@ import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 
 class SportsListingAdapter(
     val sports: List<Sports>,
+    private val glideToVectorYou: GlideToVectorYou,
     val onItemClicked: ((index: Int) -> Unit)
 ) :
     RecyclerView.Adapter<SportsListingAdapter.ViewHolder>() {
@@ -38,10 +39,7 @@ class SportsListingAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvSportItemName.text = sports[position].name
-        GlideToVectorYou
-            .init()
-            .with(holder.itemView.context)
-            .load(Uri.parse(sports[position].icon), holder.imSportsIcon)
+        glideToVectorYou.load(Uri.parse(sports[position].icon), holder.imSportsIcon)
     }
 
     override fun getItemCount(): Int {

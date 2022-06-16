@@ -1,6 +1,7 @@
 package com.example.sportz.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.example.sportz.common.Constants
 import com.example.sportz.data.local.SportsDatabase
@@ -13,9 +14,11 @@ import com.example.sportz.domain.use_case.FetchSportsUseCase
 import com.example.sportz.domain.use_case.FetchSportsItemUseCase
 import com.example.sportz.domain.use_case.SyncSportsDetailsUseCase
 import com.example.sportz.domain.use_case.SyncSportsListUseCase
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -44,6 +47,13 @@ object SportsModule {
         api: SportsApi
     ): SportsRepository {
         return SportsRepositoryImpl(dao = db.dao, api = api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGlideToVectorYou(@ApplicationContext context : Context): GlideToVectorYou {
+        return GlideToVectorYou
+            .init().with(context)
     }
 
     @Provides

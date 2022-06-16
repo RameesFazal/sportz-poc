@@ -87,4 +87,5 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:${hiltVersion}")
     debugImplementation "androidx.fragment:fragment-testing:${fragmentTestVersion}"
     androidTestImplementation "org.mockito:mockito-android:${mockitoVersion}"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
 }

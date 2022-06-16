@@ -13,7 +13,9 @@ import com.example.sportz.common.Resource
 import com.example.sportz.databinding.FragmentSportsListingBinding
 import com.example.sportz.domain.model.Sports
 import com.example.sportz.presentation.MainActivity
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SportsListingFragment : Fragment(R.layout.fragment_sports_listing) {
@@ -23,6 +25,9 @@ class SportsListingFragment : Fragment(R.layout.fragment_sports_listing) {
     private val sportsList = mutableListOf<Sports>()
     private val sportsViewModel by viewModels<SportsViewModel>()
 
+    @Inject
+    lateinit var glideToVectorYou: GlideToVectorYou
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sportListingFragmentBinding = FragmentSportsListingBinding.bind(view)
@@ -30,7 +35,7 @@ class SportsListingFragment : Fragment(R.layout.fragment_sports_listing) {
         (activity as MainActivity).supportActionBar?.title =
             getString(R.string.screen_listing_title)
         sportsList.clear()
-        sportsListingAdapter = SportsListingAdapter(sportsList) {
+        sportsListingAdapter = SportsListingAdapter(sportsList,glideToVectorYou) {
             val args = bundleOf("sportsId" to it)
             findNavController().navigate(
                 R.id.action_sportsListingFragment_to_sportsDetailsFragment,
